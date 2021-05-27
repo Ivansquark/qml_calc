@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Super_button.qml</file>
+        <file>voltage.ttf</file>
+    </qresource>
+</RCC>
