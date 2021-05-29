@@ -1,0 +1,40 @@
+#ifndef CPPTABLEMODEL_H
+#define CPPTABLEMODEL_H
+
+#include <QAbstractTableModel>
+#include <QModelIndexList>
+#include <QDebug>
+
+class CppTableModel: public QAbstractTableModel
+{
+    Q_OBJECT
+public:
+    enum Roles {
+        ColorRole = Qt::UserRole + 1,
+        TextRole,
+        SetColorRole,
+        CellWidth
+    };
+    CppTableModel(QObject* parent = nullptr);
+    ~CppTableModel();
+    //Q_PROPERTY(int number MEMBER m_number CONSTANT)
+    virtual int columnCount(const QModelIndex &parent = QModelIndex()) const;
+    virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const ;
+    virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
+    virtual QHash<int, QByteArray> roleNames() const;
+    virtual Qt::ItemFlags flags(const QModelIndex &index) const;
+    virtual bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
+
+    //Q_INVOKABLE void add();
+    //int number(int row, int col) const;
+private:
+    QHash<QModelIndex, QVariant> text_data;
+    QHash<QModelIndex, QVariant> color_data;
+    QModelIndex* init_index{nullptr};
+    int m_number=100;
+    int rows=3;
+    int cols=2;
+    void init();
+};
+
+#endif // CPPTABLEMODEL_H

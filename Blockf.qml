@@ -3,11 +3,47 @@ import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 
 GridLayout{
+
+    function isBin(x) {
+        if(x) {
+            figuresLayout.fig2_visible = false;
+            figuresLayout.fig3_visible = false;
+            figuresLayout.fig4_visible = false;
+            figuresLayout.fig5_visible = false;
+            figuresLayout.fig6_visible = false;
+            figuresLayout.fig7_visible = false;
+            figuresLayout.fig8_visible = false;
+            figuresLayout.fig9_visible = false;
+            figuresLayout.figReverse_visible = false;
+            figuresLayout.figPoint_visible = false;
+        } else {
+            figuresLayout.fig2_visible = true;
+            figuresLayout.fig3_visible = true;
+            figuresLayout.fig4_visible = true;
+            figuresLayout.fig5_visible = true;
+            figuresLayout.fig6_visible = true;
+            figuresLayout.fig7_visible = true;
+            figuresLayout.fig8_visible = true;
+            figuresLayout.fig9_visible = true;
+            figuresLayout.figReverse_visible = true;
+            figuresLayout.figPoint_visible = true;
+        }
+    }
     id: figuresLayout
     rows: 3
     columns: 4
     height: parent.height
     width: parent.width
+    property alias fig2_visible: fig2.visible
+    property alias fig3_visible: fig3.visible
+    property alias fig4_visible: fig4.visible
+    property alias fig5_visible: fig5.visible
+    property alias fig6_visible: fig6.visible
+    property alias fig7_visible: fig7.visible
+    property alias fig8_visible: fig8.visible
+    property alias fig9_visible: fig9.visible
+    property alias figReverse_visible: figReverse.visible
+    property alias figPoint_visible: figPoint.visible
     Button {
         id: fig1
         Layout.row: 1
@@ -40,6 +76,9 @@ GridLayout{
                     color: "#696969";
                 }
             }
+        }
+        onClicked: {
+            dataModel.index.text = "opa";
         }
     }
 

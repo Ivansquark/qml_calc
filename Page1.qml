@@ -3,37 +3,94 @@ import QtQuick.Window 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 import cppInterface 1.0
-
+import cppTableModel 1.0
 Page {
     id: root
     property alias backgroundColor: backgroundRectColor.color
     property alias buttonText: navigationButton.text
     signal buttonClick();
+    CppModel {
+        id: dataModel
+    }
     background: Rectangle {
         id: backgroundRectColor
     }
-    Button {
-        id: navigationButton
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.margins: defMargine
-        onClicked: {
-            root.buttonClick();
-        }
-    }
+
     ColumnLayout {
         width: parent.width
-        height: parent.height
+        //height: parent.height
         anchors.fill: parent
-//        Super_button {
-//            //Layout.fillHeight: true
-//            Layout.row: 1
-//            Layout.fillWidth: true
-//            Layout.columnSpan: 1
-//            Layout.rowSpan: 1
-//            text: "OPA"
-//        }
+        Button {
+            id: navigationButton
+//            anchors.right: parent.right
+//            anchors.top: parent.top
+//            anchors.margins: defMargine
+            Layout.alignment: parent.right
+            onClicked: {
+                root.buttonClick();
+            }
+        }
+        Rectangle {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            implicitHeight: 200
+            //implicitWidth: parent.width
+            border {
+                color: "black"
+                width: 2
+            }
+            TableView {
+                id: view
+                anchors.margins: 10
+                anchors.fill: parent
+                Layout.fillWidth: true
+                //columnSpacing: 1
+                //rowSpacing: 1
+                clip: true
+                model: dataModel
+                //! ___________table cell________________________________
+                delegate: Item {
+                    implicitHeight: 100
+                    //implicitWidth: dataModel.number  parent.width/dataModel.cellWidth
+                    implicitWidth: 10*parent.width/model.cellWidth
+                    Rectangle {
+                        anchors.margins: 5
+                        anchors.fill: parent
+                        color: model.color
+                        property var setColor: model.setColor
+                        border {
+                            color: "black"
+                            width: 2
+                        }
+                        Text {
+                            anchors.centerIn: parent
+                            renderType: Text.NativeRendering
+                            text: model.text
+                        }
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                console.log(index);
+                                if(index==0){
+                                    symbols.visible = false
+                                    figures.isBin(false);
+                                } else if (index==1) {
+                                    symbols.visible = true
+                                    figures.isBin(false);
+                                } else {
+                                    symbols.visible = false
+                                    figures.isBin(true);
+                                }
 
+                                model.setColor = "skyblue"
+
+                            }
+                            //onDoubleClicked:
+                        }
+                    }
+                }
+            }
+        }
         Rectangle{
             color: "transparent"
             border.color: "#334567ff"
@@ -164,8 +221,11 @@ Page {
             width: parent.width
             id: coLo;
             Blockf {
+                id: figures
             }
             Blocka {
+                id: symbols
+                visible: false
             }
         }
     }

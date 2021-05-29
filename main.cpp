@@ -1,4 +1,5 @@
 #include "cpp_interface.h"
+#include "cpptablemodel.h"
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -6,10 +7,12 @@
 int main(int argc, char *argv[])
 {
     cpp_interface interface;
+    CppTableModel cppTableModel;
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
     qmlRegisterType<cpp_interface>("cppInterface",1,0,"Interface");
+    qmlRegisterType<CppTableModel>("cppTableModel",1,0,"CppModel");
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

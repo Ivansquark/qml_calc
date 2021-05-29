@@ -4,6 +4,7 @@ import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 import cppInterface 1.0
 
+
 Window {
     id: window1
     visible: true
@@ -11,6 +12,8 @@ Window {
     height: 500
     property int caseIndex: 0
     property int defMargine: 10
+
+
     StackView {
         id: stackView
         anchors.fill: parent
