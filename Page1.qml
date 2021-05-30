@@ -222,6 +222,8 @@ Page {
             id: coLo;
             Blockf {
                 id: figures
+                //figReverse_visible: false
+                figPoint_visible: false
             }
             Blocka {
                 id: symbols

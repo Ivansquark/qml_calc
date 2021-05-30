@@ -37,6 +37,9 @@ GridLayout{
                 }
             }
         }
+        onClicked: {
+
+        }
     }
     Button {
         id: figB

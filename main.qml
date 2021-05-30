@@ -12,7 +12,7 @@ Window {
     height: 500
     property int caseIndex: 0
     property int defMargine: 10
-
+    signal fig1Click();
 
     StackView {
         id: stackView

@@ -91,6 +91,28 @@ bool CppTableModel::setData(const QModelIndex &index, const QVariant &value, int
     return false;
 }
 
+void CppTableModel::calcButClicked(QVariant x) {
+    QString tempStr = x.toString();
+    if(tempStr == "Reverse" && *receivedStr != "") {
+        receivedStr->chop(1);
+        setData(index(0,1),*receivedStr,TextRole);
+        return;
+    } else return;
+    *receivedStr += tempStr;
+    switch(dec_hex_bin_state) {
+    case 0: {
+        setData(index(0,1),*receivedStr,TextRole);
+    } break;
+    case 1: {
+
+    } break;
+    case 2: {
+
+    } break;
+    default: break;
+    }
+}
+
 
 
 //void CppTableModel::add()
@@ -112,6 +134,7 @@ bool CppTableModel::setData(const QModelIndex &index, const QVariant &value, int
 
 void CppTableModel::init()
 {
+    receivedStr = new QString;
     setData(index(0,0),"DEC",TextRole);
     setData(index(1,0),"HEX",TextRole);
     setData(index(2,0),"BIN",TextRole);

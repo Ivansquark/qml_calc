@@ -78,7 +78,7 @@ GridLayout{
             }
         }
         onClicked: {
-            dataModel.index.text = "opa";
+           dataModel.calcButClicked("1");
         }
     }
 
@@ -398,7 +398,7 @@ GridLayout{
         Layout.rowSpan: 1
         Layout.maximumWidth: parent.width/3
         contentItem: Text {
-            text: "1/x"
+            text: "<-"
             font.family: localFont.name
             font.pixelSize: 32
             //font: figReverse.font

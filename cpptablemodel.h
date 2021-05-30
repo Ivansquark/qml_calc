@@ -26,11 +26,14 @@ public:
     virtual bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
 
     //Q_INVOKABLE void add();
+    Q_INVOKABLE void calcButClicked(QVariant x);
     //int number(int row, int col) const;
 private:
     QHash<QModelIndex, QVariant> text_data;
     QHash<QModelIndex, QVariant> color_data;
     QModelIndex* init_index{nullptr};
+    QString* receivedStr{nullptr};
+    quint8 dec_hex_bin_state=0;
     int m_number=100;
     int rows=3;
     int cols=2;
