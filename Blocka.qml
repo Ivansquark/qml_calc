@@ -14,6 +14,7 @@ GridLayout{
         Layout.fillWidth: true
         Layout.columnSpan: 1
         Layout.rowSpan: 1
+        highlighted: true
         contentItem: Text {
             text: "A"
             font.family: localFont.name
@@ -38,7 +39,7 @@ GridLayout{
             }
         }
         onClicked: {
-
+           dataModel.calcButClicked("A");
         }
     }
     Button {
@@ -71,6 +72,9 @@ GridLayout{
                     color: "#696969";
                 }
             }
+        }
+        onClicked: {
+           dataModel.calcButClicked("B");
         }
     }
     Button {
@@ -105,6 +109,9 @@ GridLayout{
                 }
             }
         }
+        onClicked: {
+           dataModel.calcButClicked("C");
+        }
     }
     Button {
         id: figD
@@ -136,6 +143,9 @@ GridLayout{
                     color: "#696969";
                 }
             }
+        }
+        onClicked: {
+           dataModel.calcButClicked("D");
         }
     }
     Button {
@@ -169,6 +179,9 @@ GridLayout{
                 }
             }
         }
+        onClicked: {
+           dataModel.calcButClicked("E");
+        }
     }
     Button {
         id: figF
@@ -201,6 +214,9 @@ GridLayout{
                     color: "#696969";
                 }
             }
+        }
+        onClicked: {
+           dataModel.calcButClicked("F");
         }
     }
 }

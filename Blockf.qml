@@ -3,46 +3,74 @@ import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 
 GridLayout{
-
     function isBin(x) {
         if(x) {
-            figuresLayout.fig2_visible = false;
-            figuresLayout.fig3_visible = false;
-            figuresLayout.fig4_visible = false;
-            figuresLayout.fig5_visible = false;
-            figuresLayout.fig6_visible = false;
-            figuresLayout.fig7_visible = false;
-            figuresLayout.fig8_visible = false;
-            figuresLayout.fig9_visible = false;
-            figuresLayout.figReverse_visible = false;
-            figuresLayout.figPoint_visible = false;
+            figuresLayout.fig2_text = "";
+            figuresLayout.fig3_text = "";
+            figuresLayout.fig4_text = "";
+            figuresLayout.fig5_text = "";
+            figuresLayout.fig6_text = "";
+            figuresLayout.fig7_text = "";
+            figuresLayout.fig8_text = "";
+            figuresLayout.fig9_text = "";
+            figuresLayout.fig2_enabled = false;
+            figuresLayout.fig3_enabled = false;
+            figuresLayout.fig4_enabled = false;
+            figuresLayout.fig5_enabled = false;
+            figuresLayout.fig6_enabled = false;
+            figuresLayout.fig7_enabled = false;
+            figuresLayout.fig8_enabled = false;
+            figuresLayout.fig9_enabled = false;
+            figuresLayout.figPoint_enabled = false;
+
         } else {
-            figuresLayout.fig2_visible = true;
-            figuresLayout.fig3_visible = true;
-            figuresLayout.fig4_visible = true;
-            figuresLayout.fig5_visible = true;
-            figuresLayout.fig6_visible = true;
-            figuresLayout.fig7_visible = true;
-            figuresLayout.fig8_visible = true;
-            figuresLayout.fig9_visible = true;
-            figuresLayout.figReverse_visible = true;
-            figuresLayout.figPoint_visible = true;
+            figuresLayout.fig2_text = "2";
+            figuresLayout.fig3_text = "3";
+            figuresLayout.fig4_text = "4";
+            figuresLayout.fig5_text = "5";
+            figuresLayout.fig6_text = "6";
+            figuresLayout.fig7_text = "7";
+            figuresLayout.fig8_text = "8";
+            figuresLayout.fig9_text = "9";
+            figuresLayout.fig2_enabled = true;
+            figuresLayout.fig3_enabled = true;
+            figuresLayout.fig4_enabled = true;
+            figuresLayout.fig5_enabled = true;
+            figuresLayout.fig6_enabled = true;
+            figuresLayout.fig7_enabled = true;
+            figuresLayout.fig8_enabled = true;
+            figuresLayout.fig9_enabled = true;
+            figuresLayout.figPoint_enabled = true;
         }
     }
     id: figuresLayout
     rows: 3
     columns: 4
-    height: parent.height
-    width: parent.width
-    property alias fig2_visible: fig2.visible
-    property alias fig3_visible: fig3.visible
-    property alias fig4_visible: fig4.visible
-    property alias fig5_visible: fig5.visible
-    property alias fig6_visible: fig6.visible
-    property alias fig7_visible: fig7.visible
-    property alias fig8_visible: fig8.visible
-    property alias fig9_visible: fig9.visible
-    property alias figReverse_visible: figReverse.visible
+    //anchors.fill: parent
+    //height: parent.height
+    //width: parent.width
+    Layout.alignment: Qt.AlignHCenter
+    columnSpacing: 5
+    property alias fig2_text: text2.text
+    property alias fig3_text: text3.text
+    property alias fig4_text: text4.text
+    property alias fig5_text: text5.text
+    property alias fig6_text: text6.text
+    property alias fig7_text: text7.text
+    property alias fig8_text: text8.text
+    property alias fig9_text: text9.text
+    property alias fig0_enabled: fig0.enabled
+    property alias fig1_enabled: fig1.enabled
+    property alias fig2_enabled: fig2.enabled
+    property alias fig3_enabled: fig3.enabled
+    property alias fig4_enabled: fig4.enabled
+    property alias fig5_enabled: fig5.enabled
+    property alias fig6_enabled: fig6.enabled
+    property alias fig7_enabled: fig7.enabled
+    property alias fig8_enabled: fig8.enabled
+    property alias fig9_enabled: fig9.enabled
+    property alias figReverse_enabled: figReverse.enabled
+    property alias figPoint_enabled: figPoint.enabled
     property alias figPoint_visible: figPoint.visible
     Button {
         id: fig1
@@ -52,7 +80,8 @@ GridLayout{
         Layout.fillWidth: true
         Layout.columnSpan: 1
         Layout.rowSpan: 1
-        Layout.maximumWidth: parent.width/3
+        Layout.alignment: Qt.AlignHCenter
+        //Layout.preferredWidth: parent.width - 5
         contentItem: Text {
             text: "1"
             font.family: localFont.name
@@ -79,6 +108,7 @@ GridLayout{
         }
         onClicked: {
            dataModel.calcButClicked("1");
+           cppListModel.calc1ButClicked("1");
         }
     }
 
@@ -90,8 +120,10 @@ GridLayout{
         Layout.fillWidth: true
         Layout.columnSpan: 1
         Layout.rowSpan: 1
-        Layout.maximumWidth: parent.width/3
+        Layout.alignment: Qt.AlignHCenter
+        //Layout.preferredWidth: parent.width - 5
         contentItem: Text {
+            id: text2
             text: "2"
             font.family: localFont.name
             font.pixelSize: 32
@@ -115,6 +147,10 @@ GridLayout{
                 }
             }
         }
+        onClicked: {
+            dataModel.calcButClicked("2");
+            cppListModel.calc1ButClicked("2");
+        }
     }
 
     Button {
@@ -125,10 +161,12 @@ GridLayout{
         Layout.fillWidth: true
         Layout.columnSpan: 1
         Layout.rowSpan: 1
-        Layout.maximumWidth: parent.width/3
+        Layout.alignment: Qt.AlignHCenter
         contentItem: Text {
+            id: text3
             text: "3"
             font.family: localFont.name
+            style: Text.Outline
             font.pixelSize: 32
             //font: fig3.font
             color: fig3.down ? "#000010" : "#180c3e"
@@ -150,6 +188,10 @@ GridLayout{
                 }
             }
         }
+        onClicked: {
+            dataModel.calcButClicked("3");
+            cppListModel.calc1ButClicked("3");
+        }
     }
     Button {
         id: fig4
@@ -160,6 +202,7 @@ GridLayout{
         Layout.columnSpan: 1
         Layout.rowSpan: 1
         contentItem: Text {
+            id: text4
             text: "4"
             font.family: localFont.name
             font.pixelSize: 32
@@ -183,6 +226,10 @@ GridLayout{
                 }
             }
         }
+        onClicked: {
+           dataModel.calcButClicked("4");
+           cppListModel.calc1ButClicked("4");
+        }
     }
     Button {
         id: fig5
@@ -192,8 +239,8 @@ GridLayout{
         Layout.fillWidth: true
         Layout.columnSpan: 1
         Layout.rowSpan: 1
-        Layout.maximumWidth: parent.width/3
         contentItem: Text {
+            id: text5;
             text: "5"
             font.family: localFont.name
             font.pixelSize: 32
@@ -217,6 +264,10 @@ GridLayout{
                 }
             }
         }
+        onClicked: {
+            dataModel.calcButClicked("5");
+            cppListModel.calc1ButClicked("5");
+        }
     }
     Button {
         id: fig6
@@ -226,8 +277,8 @@ GridLayout{
         Layout.fillWidth: true
         Layout.columnSpan: 1
         Layout.rowSpan: 1
-        Layout.maximumWidth: parent.width/3
         contentItem: Text {
+            id: text6
             text: "6"
             font.family: localFont.name
             font.pixelSize: 32
@@ -251,6 +302,10 @@ GridLayout{
                 }
             }
         }
+        onClicked: {
+            dataModel.calcButClicked("6");
+            cppListModel.calc1ButClicked("6");
+        }
     }
     Button {
         id: fig7
@@ -260,8 +315,8 @@ GridLayout{
         Layout.fillWidth: true
         Layout.columnSpan: 1
         Layout.rowSpan: 1
-        Layout.maximumWidth: parent.width/3
         contentItem: Text {
+            id: text7
             text: "7"
             font.family: localFont.name
             font.pixelSize: 32
@@ -285,6 +340,10 @@ GridLayout{
                 }
             }
         }
+        onClicked: {
+            dataModel.calcButClicked("7");
+            cppListModel.calc1ButClicked("7");
+        }
     }
     Button {
         id: fig8
@@ -294,8 +353,8 @@ GridLayout{
         Layout.fillWidth: true
         Layout.columnSpan: 1
         Layout.rowSpan: 1
-        Layout.maximumWidth: parent.width/3
         contentItem: Text {
+            id: text8
             text: "8"
             font.family: localFont.name
             font.pixelSize: 32
@@ -305,11 +364,11 @@ GridLayout{
             verticalAlignment: Text.AlignVCenter
         }
         background: Rectangle {
-                border.color: fig8.pressed ? "#999999" : "#898999"
-                border.width: fig8.pressed ? 1 : 2
-                radius: 15
-                gradient: Gradient {
-                    GradientStop {
+            border.color: fig8.pressed ? "#999999" : "#898999"
+            border.width: fig8.pressed ? 1 : 2
+            radius: 15
+            gradient: Gradient {
+                GradientStop {
                     position: 0.1;
                     color: "#95dbd7";
                 }
@@ -318,6 +377,10 @@ GridLayout{
                     color: "#696969";
                 }
             }
+        }
+        onClicked: {
+            dataModel.calcButClicked("8");
+            cppListModel.calc1ButClicked("8");
         }
     }
     Button {
@@ -328,8 +391,8 @@ GridLayout{
         Layout.fillWidth: true
         Layout.columnSpan: 1
         Layout.rowSpan: 1
-        Layout.maximumWidth: parent.width/3
         contentItem: Text {
+            id: text9
             text: "9"
             font.family: localFont.name
             font.pixelSize: 32
@@ -353,6 +416,10 @@ GridLayout{
                 }
             }
         }
+        onClicked: {
+            dataModel.calcButClicked("9");
+            cppListModel.calc1ButClicked("9");
+        }
     }
     Button {
         id: figPoint
@@ -362,7 +429,6 @@ GridLayout{
         Layout.fillWidth: true
         Layout.columnSpan: 1
         Layout.rowSpan: 1
-        Layout.maximumWidth: parent.width/3
         contentItem: Text {
             text: "."
             font.family: localFont.name
@@ -387,6 +453,10 @@ GridLayout{
                 }
             }
         }
+        visible: false
+        onClicked: {
+            cppListModel.calc1ButClicked(".");
+        }
     }
     Button {
         id: figReverse
@@ -396,9 +466,8 @@ GridLayout{
         Layout.fillWidth: true
         Layout.columnSpan: 1
         Layout.rowSpan: 1
-        Layout.maximumWidth: parent.width/3
         contentItem: Text {
-            text: "<-"
+            text: "<"
             font.family: localFont.name
             font.pixelSize: 32
             //font: figReverse.font
@@ -421,6 +490,9 @@ GridLayout{
                 }
             }
         }
+        onClicked: {
+           dataModel.calcButClicked("Reverse");
+        }
     }
     Button {
         id: fig0
@@ -430,7 +502,6 @@ GridLayout{
         Layout.fillWidth: true
         Layout.columnSpan: 1
         Layout.rowSpan: 1
-        Layout.maximumWidth: parent.width/3
         contentItem: Text {
             text: "0"
             font.family: localFont.name
@@ -454,6 +525,9 @@ GridLayout{
                     color: "#696969";
                 }
             }
+        }
+        onClicked: {
+           dataModel.calcButClicked("0");
         }
     }
 }

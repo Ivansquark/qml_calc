@@ -15,6 +15,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         cpp_interface.cpp \
+        cpplistmodel.cpp \
         cpptablemodel.cpp \
         main.cpp
 
@@ -33,4 +34,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     cpp_interface.h \
+    cpplistmodel.h \
     cpptablemodel.h

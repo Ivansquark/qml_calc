@@ -3,31 +3,78 @@ import QtQuick.Window 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 import cppInterface 1.0
-import cppTableModel 1.0
+
 Page {
     id: root
     property alias backgroundColor: backgroundRectColor.color
     property alias buttonText: navigationButton.text
+    property alias buttonCloseText: exitButton.text
     signal buttonClick();
-    CppModel {
-        id: dataModel
-    }
+    signal buttonCloseClick();
+
     background: Rectangle {
         id: backgroundRectColor
+        color: "#affaf0e6"
     }
 
     ColumnLayout {
-        width: parent.width
+        //width: parent.width
         //height: parent.height
         anchors.fill: parent
-        Button {
-            id: navigationButton
-//            anchors.right: parent.right
-//            anchors.top: parent.top
-//            anchors.margins: defMargine
-            Layout.alignment: parent.right
-            onClicked: {
-                root.buttonClick();
+        Rectangle {
+            //anchors.fill: parent
+            //Layout.fillHeight: true
+            implicitHeight: 50
+            Layout.fillWidth: true
+            color: "#affaf0e6"
+            //width: parent.width
+            Button {
+                id: exitButton
+                anchors.left: parent.left
+                Layout.alignment: Qt.AlignLeft
+                font.pixelSize: 30
+                background: Rectangle {
+                    border.color: exitButton.pressed ? "#999999" : "#898999"
+                    border.width: exitButton.pressed ? 1 : 2
+                    radius: 15
+                    gradient: Gradient {
+                        GradientStop {
+                            position: 0.1;
+                            color: "#95dbd7";
+                        }
+                        GradientStop {
+                            position: 0.90;
+                            color: "#696969";
+                        }
+                    }
+                }
+                onClicked: {
+                    page1.buttonCloseClick()
+                }
+            }
+            Button {
+                id: navigationButton
+                anchors.right: parent.right
+                Layout.alignment: Qt.AlignRight
+                font.pixelSize: 30
+                background: Rectangle {
+                    border.color: navigationButton.pressed ? "#999999" : "#898999"
+                    border.width: navigationButton.pressed ? 1 : 2
+                    radius: 15
+                    gradient: Gradient {
+                        GradientStop {
+                            position: 0.1;
+                            color: "#95dbd7";
+                        }
+                        GradientStop {
+                            position: 0.90;
+                            color: "#696969";
+                        }
+                    }
+                }
+                onClicked: {
+                    root.buttonClick();
+                }
             }
         }
         Rectangle {
@@ -35,8 +82,10 @@ Page {
             Layout.fillWidth: true
             implicitHeight: 200
             //implicitWidth: parent.width
+            color: "#affaf0e6"
             border {
-                color: "black"
+                //color: "black"
+                color: "#affaf0e6"
                 width: 2
             }
             TableView {
@@ -48,23 +97,31 @@ Page {
                 //rowSpacing: 1
                 clip: true
                 model: dataModel
+
                 //! ___________table cell________________________________
                 delegate: Item {
                     implicitHeight: 100
-                    //implicitWidth: dataModel.number  parent.width/dataModel.cellWidth
+                    //implicitWidth: 100
                     implicitWidth: 10*parent.width/model.cellWidth
                     Rectangle {
+                        //Layout.fillHeight: true
+                        //Layout.fillWidth: true
+                        implicitHeight: 50
                         anchors.margins: 5
                         anchors.fill: parent
                         color: model.color
+                        radius: 5
                         property var setColor: model.setColor
                         border {
-                            color: "black"
-                            width: 2
+                            color: "grey"
+                            width: 2                            
                         }
                         Text {
+                            font.family: localFont.name
+                            font.pixelSize: 25
                             anchors.centerIn: parent
                             renderType: Text.NativeRendering
+                            color: "#022f15"
                             text: model.text
                         }
                         MouseArea {
@@ -75,155 +132,27 @@ Page {
                                     symbols.visible = false
                                     figures.isBin(false);
                                 } else if (index==1) {
-                                    symbols.visible = true
                                     figures.isBin(false);
-                                } else {
+                                    figures.visible = true
+                                    symbols.visible = true
+                                } else if (index==2){
                                     symbols.visible = false
                                     figures.isBin(true);
                                 }
-
                                 model.setColor = "skyblue"
-
                             }
                             //onDoubleClicked:
                         }
                     }
                 }
             }
-        }
-        Rectangle{
-            color: "transparent"
-            border.color: "#334567ff"
-            border.width: 5
-            Layout.row: 2
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            implicitHeight: 50
-            //Layout.columnSpan: 1
-            //Layout.rowSpan: 1
-            TextEdit {
-                id: textEdit
-                text: qsTr("")
-                font.pixelSize: 25
-                //anchors.centerIn: parent
-                anchors.left:parent.left
-                anchors.verticalCenter: parent.verticalCenter
-                focus: true
-                onTextChanged: {
-                    switch(caseIndex) {
-                    case 0:
-                        labelDEC.text = inter.convertToDec(textEdit.text,0);
-                        labelHEX.text = inter.convertToHex(textEdit.text,0);
-                        labelBIN.text = inter.convertToBin(textEdit.text,0);
-                        break;
-                    case 1:
-                        labelDEC.text = inter.convertToDec(textEdit.text,1);
-                        labelHEX.text = inter.convertToHex(textEdit.text,1);
-                        labelBIN.text = inter.convertToBin(textEdit.text,1);
-                        break;
-                    case 2:
-                        labelDEC.text = inter.convertToDec(textEdit.text,2);
-                        labelHEX.text = inter.convertToHex(textEdit.text,2);
-                        labelBIN.text = inter.convertToBin(textEdit.text,2);
-                        break;
-                    }
-                    if(textEdit.text === ""){
-                        labelHEX.text = "HEX";
-                        labelBIN.text = "BIN";
-                        labelDEC.text = "DEC";
-                    }
-                }
-            }
-        }
-        Rectangle{
-            id: rectDEC
-            color: 'grey'
-            border.color: "#334567ff"
-            border.width: 5
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            Layout.columnSpan: 1
-            Layout.rowSpan: 1
-            implicitHeight: 50
-            Label {
-                id: labelDEC
-                text: qsTr("DEC")
-                font.pixelSize: 25
-                font.family: localFont.name
-                anchors.left:parent.left
-                anchors.verticalCenter: parent.verticalCenter
-            }
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    textEdit.text = ""; textEdit.focus = true;
-                    caseIndex = 0;
-                    rectDEC.color = 'grey'; rectBIN.color = 'transparent'; rectHEX.color = 'transparent';
-                }
-            }
-        }
-        Rectangle{
-            id: rectHEX
-            border.color: "#334567ff"
-            border.width: 5
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            Layout.columnSpan: 1
-            Layout.rowSpan: 1
-            implicitHeight: 50
-            Label {
-                id: labelHEX
-                text: qsTr("HEX")
-                font.pixelSize: 25
-                font.family: localFont.name
-                anchors.left:parent.left
-                anchors.verticalCenter: parent.verticalCenter
-            }
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    textEdit.text = ""; textEdit.focus = true;
-                    caseIndex = 1;
-                    rectHEX.color = 'grey'; rectDEC.color = 'transparent'; rectBIN.color = 'transparent';
-                }
-            }
-        }
-        Rectangle{
-            //color: "transparent"
-            id: rectBIN
-            border.color: "#334567ff"
-            border.width: 5
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            Layout.columnSpan: 1
-            Layout.rowSpan: 1
-            implicitHeight: 50
-            Label {
-                id: labelBIN
-                text: qsTr("BIN")
-                font.pixelSize: 25
-                font.family: localFont.name
-                anchors.left:parent.left
-                anchors.verticalCenter: parent.verticalCenter
-            }
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    textEdit.text = ""; textEdit.focus = true;
-                    caseIndex = 2;
-                    rectBIN.color = 'grey'; rectDEC.color = 'transparent'; rectHEX.color = 'transparent';
-                }
-            }
-
-        }
+        }        
         RowLayout {
             height: parent.height
             width: parent.width
             id: coLo;
             Blockf {
                 id: figures
-                //figReverse_visible: false
-                figPoint_visible: false
             }
             Blocka {
                 id: symbols
@@ -231,5 +160,4 @@ Page {
             }
         }
     }
-
 }

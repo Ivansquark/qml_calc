@@ -28,7 +28,7 @@ QVariant CppTableModel::data(const QModelIndex &index, int role) const
     }
     case CellWidth:
         if(index.column()==0) {
-            return 90;
+            return 80;
         } else {
             return 12;
         }
@@ -68,46 +68,60 @@ bool CppTableModel::setData(const QModelIndex &index, const QVariant &value, int
     case SetColorRole: {
         if(index.column() == 0) {
             for(QModelIndex i: color_data.keys()) {
-                setData(i,"transparent",ColorRole);
+                setData(i,"grey",ColorRole);
             }
             setData(index,"skyblue",ColorRole);
+            switch(index.row()) {
+            case 0: dec_hex_bin_state = 0; *receivedStr=""; setZeroes(); break;
+            case 1: dec_hex_bin_state = 1; *receivedStr=""; setZeroes(); break;
+            case 2: dec_hex_bin_state = 2; *receivedStr=""; setZeroes(); break;
+            default: break;
+            }
+        return true;
         }
-        return false;
     }
     case ColorRole:
         color_data.insert(index,value);
         emit dataChanged(index,index);
-        return false;
+        return true;
     case TextRole: {
         text_data.insert(index,value);
         emit dataChanged(index,index);
-        return false;
+        return true;
     }
     case Qt::DisplayRole:
         return true;
     default:
-        return true;
+        return false;
     }
     return false;
 }
 
 void CppTableModel::calcButClicked(QVariant x) {
     QString tempStr = x.toString();
+
     if(tempStr == "Reverse" && *receivedStr != "") {
         receivedStr->chop(1);
-        setData(index(0,1),*receivedStr,TextRole);
+    } else if(tempStr == "Reverse") {
         return;
-    } else return;
-    *receivedStr += tempStr;
+    } else {
+        *receivedStr += tempStr;
+    }
     switch(dec_hex_bin_state) {
     case 0: {
         setData(index(0,1),*receivedStr,TextRole);
+        setData(index(1,1), convertToHex(*receivedStr),TextRole);
+        setData(index(2,1), convertToBin(*receivedStr),TextRole);
     } break;
     case 1: {
-
+        setData(index(0,1), convertToDec(*receivedStr), TextRole);
+        setData(index(1,1),*receivedStr,TextRole);
+        setData(index(2,1), convertToBin(*receivedStr),TextRole);
     } break;
     case 2: {
-
+        setData(index(0,1), convertToDec(*receivedStr), TextRole);
+        setData(index(1,1), convertToHex(*receivedStr),TextRole);
+        setData(index(2,1),*receivedStr,TextRole);
     } break;
     default: break;
     }
@@ -142,9 +156,67 @@ void CppTableModel::init()
     setData(index(1,1),"0",TextRole);
     setData(index(2,1),"0",TextRole);
     setData(index(0,0),"skyblue",ColorRole);
-    setData(index(1,0),"transparent",ColorRole);
-    setData(index(2,0),"transparent",ColorRole);
-    setData(index(0,1),"transparent",ColorRole);
-    setData(index(1,1),"transparent",ColorRole);
-    setData(index(2,1),"transparent",ColorRole);
+    setData(index(1,0),"grey",ColorRole);
+    setData(index(2,0),"grey",ColorRole);
+    setData(index(0,1),"grey",ColorRole);
+    setData(index(1,1),"grey",ColorRole);
+    setData(index(2,1),"grey",ColorRole);
+}
+
+QString CppTableModel::convertToBin(const QVariant &str) {
+    QString temp=str.toString();
+    switch(dec_hex_bin_state) {
+    case 0: {
+        qulonglong bin = temp.toULongLong();
+        temp = QString::number(bin,2);
+    } break;
+    case 1: {
+        bool ok;
+        temp = QString::number(temp.toLongLong(&ok, 16),10);
+        qulonglong bin = temp.toULongLong();
+        temp = QString::number(bin,2);
+    } break;
+    case 2: {
+
+    } break;
+    default: break;
+    }
+    return temp;
+}
+
+QString CppTableModel::convertToHex(const QVariant &str) {
+    QString temp=str.toString();
+    switch(dec_hex_bin_state) {
+    case 0: {
+        temp = QString::number(temp.toLongLong(),16);
+    }break;
+    case 1: {
+
+    } break;
+    case 2: {
+        bool ok;
+        temp = QString::number(temp.toLongLong(&ok, 2),16);
+    } break;
+    default: break;
+    }
+    return temp;
+}
+
+QString CppTableModel::convertToDec(const QVariant &str) {
+    QString temp=str.toString();
+    switch(dec_hex_bin_state) {
+    case 0: {
+
+    } break;
+    case 1: {
+        bool ok;
+        temp = QString::number(temp.toLongLong(&ok, 16),10);
+    } break;
+    case 2: {
+        bool ok;
+        temp = QString::number(temp.toLongLong(&ok, 2),10);
+    } break;
+    default: break;
+    }
+    return temp;
 }
