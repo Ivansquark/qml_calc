@@ -491,7 +491,8 @@ GridLayout{
             }
         }
         onClicked: {
-           dataModel.calcButClicked("Reverse");
+            dataModel.calcButClicked("<");
+            cppListModel.calc1ButClicked("<")
         }
     }
     Button {
@@ -527,7 +528,8 @@ GridLayout{
             }
         }
         onClicked: {
-           dataModel.calcButClicked("0");
+            dataModel.calcButClicked("0");
+            cppListModel.calc1ButClicked("0");
         }
     }
 }

@@ -35,6 +35,9 @@ RowLayout{
                 }
             }
         }
+        onClicked: {
+           cppListModel.calc1ButClicked("*");
+        }
     }
     Button {
         id: figDiv
@@ -66,6 +69,9 @@ RowLayout{
                 }
             }
         }
+        onClicked: {
+           cppListModel.calc1ButClicked("/");
+        }
     }
     Button {
         id: figSqrt
@@ -76,7 +82,7 @@ RowLayout{
         Layout.rowSpan: 1
 
         contentItem: Text {
-            text: "Sqrt"
+            text: "\u221A" //sqrt symbol in unicode
             font.family: localFont.name
             font.pixelSize: 32
             //font: figEq.font
@@ -97,6 +103,44 @@ RowLayout{
                     color: "#696969";
                 }
             }
+        }
+        onClicked: {
+           cppListModel.calc1ButClicked("sqrt");
+        }
+    }
+    Button {
+        id: figClear
+        Layout.row: 3
+        Layout.fillHeight: true
+        Layout.fillWidth: true
+        Layout.columnSpan: 1
+        Layout.rowSpan: 1
+
+        contentItem: Text {
+            text: "C" //sqrt symbol in unicode
+            font.family: localFont.name
+            font.pixelSize: 32
+            //font: figEq.font
+            color: figClear.down ? "#000010" : "#180c3e"
+            horizontalAlignment: Text.AlignHCenter
+        }
+        background: Rectangle {
+                border.color: figClear.pressed ? "#999999" : "#898999"
+                border.width: figClear.pressed ? 1 : 2
+                radius: 15
+                gradient: Gradient {
+                    GradientStop {
+                    position: 0.1;
+                    color: "#95dbd7";
+                }
+                GradientStop {
+                    position: 0.90;
+                    color: "#696969";
+                }
+            }
+        }
+        onClicked: {
+           cppListModel.calc1ButClicked("C");
         }
     }
 }

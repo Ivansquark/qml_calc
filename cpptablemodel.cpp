@@ -100,9 +100,9 @@ bool CppTableModel::setData(const QModelIndex &index, const QVariant &value, int
 void CppTableModel::calcButClicked(QVariant x) {
     QString tempStr = x.toString();
 
-    if(tempStr == "Reverse" && *receivedStr != "") {
+    if(tempStr == "<" && *receivedStr != "") {
         receivedStr->chop(1);
-    } else if(tempStr == "Reverse") {
+    } else if(tempStr == "<") {
         return;
     } else {
         *receivedStr += tempStr;

@@ -2,7 +2,6 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
-import cppInterface 1.0
 import cppTableModel 1.0
 import cppListModel 1.0
 
@@ -30,7 +29,7 @@ Window {
     Page1 {
         id: page1
         backgroundColor:"#affaf0e6"
-        buttonText: "next"
+        buttonText: "calc"
         buttonCloseText: "<"
         onButtonCloseClick: close();
         onButtonClick: {
@@ -40,7 +39,7 @@ Window {
     Page2 {
         id: page2
         backgroundColor: "#affaf0e6"
-        buttonText: "back"        
+        buttonText: "hex"
         onButtonClick: {
             stackView.pop();
             cppListModel.zeroes();
@@ -50,9 +49,7 @@ Window {
         visible: false
     }
 
-    Interface {
-        id: inter // C++ interface class
-    }
+
     FontLoader { id: localFont; source: Qt.resolvedUrl("voltage.ttf"); }
 
     //visibility: "FullScreen"

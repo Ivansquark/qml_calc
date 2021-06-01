@@ -7,37 +7,6 @@ ColumnLayout{
     height: parent.height
     width: parent.width
     Button {
-        id: figPlus
-        Layout.row: 1
-        Layout.fillHeight: true
-        Layout.fillWidth: true
-        Layout.columnSpan: 1
-        Layout.rowSpan: 1
-        contentItem: Text {
-            text: "+"
-            font.family: localFont.name
-            font.pixelSize: 32
-            //font: figPlus.font
-            color: figPlus.down ? "#000010" : "#180c3e"
-            horizontalAlignment: Text.AlignHCenter
-        }
-        background: Rectangle {
-                border.color: figPlus.pressed ? "#999999" : "#898999"
-                border.width: figPlus.pressed ? 1 : 2
-                radius: 15
-                gradient: Gradient {
-                    GradientStop {
-                    position: 0.1;
-                    color: "#95dbd7";
-                }
-                GradientStop {
-                    position: 0.90;
-                    color: "#696969";
-                }
-            }
-        }
-    }
-    Button {
         id: figMinus
         Layout.row: 2
         Layout.fillHeight: true
@@ -67,7 +36,44 @@ ColumnLayout{
                 }
             }
         }
+        onClicked: {
+           cppListModel.calc1ButClicked("-");
+        }
     }
+    Button {
+        id: figPlus
+        Layout.row: 1
+        Layout.fillHeight: true
+        Layout.fillWidth: true
+        Layout.columnSpan: 1
+        Layout.rowSpan: 1
+        contentItem: Text {
+            text: "+"
+            font.family: localFont.name
+            font.pixelSize: 32
+            //font: figPlus.font
+            color: figPlus.down ? "#000010" : "#180c3e"
+            horizontalAlignment: Text.AlignHCenter
+        }
+        background: Rectangle {
+                border.color: figPlus.pressed ? "#999999" : "#898999"
+                border.width: figPlus.pressed ? 1 : 2
+                radius: 15
+                gradient: Gradient {
+                    GradientStop {
+                    position: 0.1;
+                    color: "#95dbd7";
+                }
+                GradientStop {
+                    position: 0.90;
+                    color: "#696969";
+                }
+            }
+        }
+        onClicked: {
+           cppListModel.calc1ButClicked("+");
+        }
+    }    
     Button {
         id: figEq
         Layout.row: 3
@@ -98,6 +104,9 @@ ColumnLayout{
                     color: "#696969";
                 }
             }
+        }
+        onClicked: {
+           cppListModel.calc1ButClicked("=");
         }
     }
 }

@@ -4,6 +4,7 @@
 #include <QAbstractListModel>
 #include <QModelIndex>
 #include <QDebug>
+#include <QtMath>
 
 class CppListModel: public QAbstractListModel
 {
@@ -26,11 +27,27 @@ public:
     }
 private:
     void init();
+    __forceinline void printData(const QString &receive, const QString &threat);
     QHash<QModelIndex, QVariant> text_data;
     QString* receivedStr{nullptr};
     QString* threatData{nullptr};
-
+    QString* firstOperator{nullptr};
+    QString* secondOperator{nullptr};
+    double first = 0;
+    double second = 0;
+    enum class CountingState {
+        FIRST = 0,
+        OPERATOR = 1,
+        SECOND = 2,
+        START_COUNT = 3
+    };
+    CountingState countState = CountingState::FIRST;
+    bool startCountFlag = false;
+    bool startOperatorFlag = false;
     __forceinline void setZeroes() {
+        first = 0; second = 0;
+        *receivedStr = "";
+        *threatData = "";
         setData(index(0),"0",TextRole);
         setData(index(1),"0",TextRole);
     }
