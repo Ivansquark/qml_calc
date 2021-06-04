@@ -79,7 +79,7 @@ Page {
         Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            implicitHeight: 200
+            implicitHeight: 250
             //implicitWidth: parent.width
             color: "#affaf0e6"
             border {
@@ -89,9 +89,12 @@ Page {
             }
             TableView {
                 id: view
-                anchors.margins: 10
+                //anchors.margins: 10
                 anchors.fill: parent
-                Layout.fillWidth: true
+                //anchors.right: parent.right
+                //height: parent.height
+                //width: parent.width
+                //Layout.fillWidth: true
                 //columnSpacing: 1
                 //rowSpacing: 1
                 clip: true
@@ -101,10 +104,10 @@ Page {
                 delegate: Item {
                     implicitHeight: 100
                     //implicitWidth: 100
-                    implicitWidth: 10*parent.width/model.cellWidth
+                    implicitWidth: 16*parent.width/model.cellWidth
                     Rectangle {
-                        //Layout.fillHeight: true
-                        //Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
                         implicitHeight: 50
                         anchors.margins: 5
                         anchors.fill: parent
@@ -115,13 +118,20 @@ Page {
                             color: "grey"
                             width: 2                            
                         }
+
                         Text {
+                            id: textHex
                             font.family: localFont.name
                             font.pixelSize: 25
+                            //height: parent.height
+                            //width: parent.width
                             anchors.centerIn: parent
                             renderType: Text.NativeRendering
                             color: "#022f15"
                             text: model.text
+                            wrapMode: Text.WrapAnywhere
+                            elide: Text.ElideMiddle
+
                         }
                         MouseArea {
                             anchors.fill: parent
@@ -138,7 +148,9 @@ Page {
                                     symbols.visible = false
                                     figures.isBin(true);
                                 }
-                                model.setColor = "skyblue"
+                                if(index==0 || index==1 || index ==2){
+                                    model.setColor = "skyblue"
+                                }
                             }
                             //onDoubleClicked:
                         }

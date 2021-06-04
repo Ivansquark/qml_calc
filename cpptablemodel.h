@@ -28,7 +28,7 @@ public:
 
     //Q_INVOKABLE void add();
     Q_INVOKABLE void calcButClicked(QVariant x);
-    __forceinline Q_INVOKABLE void zeroes() {
+    inline Q_INVOKABLE void zeroes() {
         setZeroes();
     }
     //int number(int row, int col) const;
@@ -43,7 +43,7 @@ private:
     int cols=2;
 
     void init();
-    __forceinline void setZeroes() {
+    inline void setZeroes() {
         setData(index(0,1),"0",TextRole);
         setData(index(1,1),"0",TextRole);
         setData(index(2,1),"0",TextRole);

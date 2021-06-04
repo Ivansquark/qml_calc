@@ -30,10 +30,12 @@ Window {
         id: page1
         backgroundColor:"#affaf0e6"
         buttonText: "calc"
-        buttonCloseText: "<"
+        buttonCloseText: " <<< "
         onButtonCloseClick: close();
         onButtonClick: {
             stackView.push(page2);
+            cppListModel.zeroes();
+            dataModel.zeroes();
         }
     }
     Page2 {
@@ -52,6 +54,6 @@ Window {
 
     FontLoader { id: localFont; source: Qt.resolvedUrl("voltage.ttf"); }
 
-    //visibility: "FullScreen"
+    visibility: "FullScreen"
 }
 

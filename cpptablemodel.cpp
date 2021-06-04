@@ -30,7 +30,7 @@ QVariant CppTableModel::data(const QModelIndex &index, int role) const
         if(index.column()==0) {
             return 80;
         } else {
-            return 12;
+            return 20;
         }
         //return QString("%1, %2").arg(index.column()).arg(index.row());
     default:
@@ -56,7 +56,7 @@ QHash<int, QByteArray> CppTableModel::roleNames() const
 Qt::ItemFlags CppTableModel::flags(const QModelIndex &index) const
 {
     static int i; i++;
-    qDebug()<<"FLAGS"<<i;
+    //qDebug()<<"FLAGS"<<i;
     if (!index.isValid())
         return Qt::ItemIsEnabled;
     return QAbstractTableModel::flags(index) | Qt::ItemIsSelectable;
@@ -79,7 +79,7 @@ bool CppTableModel::setData(const QModelIndex &index, const QVariant &value, int
             }
         return true;
         }
-    }
+    } break;
     case ColorRole:
         color_data.insert(index,value);
         emit dataChanged(index,index);
@@ -105,6 +105,13 @@ void CppTableModel::calcButClicked(QVariant x) {
     } else if(tempStr == "<") {
         return;
     } else {
+        if(dec_hex_bin_state == 2){
+            if(receivedStr->size()>15) return;
+        }else if(dec_hex_bin_state == 1) {
+            if(receivedStr->size()>7) return;
+        } else {
+            if(receivedStr->size()>9) return;
+        }
         *receivedStr += tempStr;
     }
     switch(dec_hex_bin_state) {

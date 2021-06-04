@@ -85,7 +85,7 @@ GridLayout{
         contentItem: Text {
             text: "1"
             font.family: localFont.name
-            font.pixelSize: 32
+            font.pixelSize: 40
             //font: fig1.font
             color: fig1.down ? "#000010" : "#180c3e"
             horizontalAlignment: Text.AlignHCenter
@@ -126,7 +126,7 @@ GridLayout{
             id: text2
             text: "2"
             font.family: localFont.name
-            font.pixelSize: 32
+            font.pixelSize: 40
             //font: fig2.font
             color: fig2.down ? "#000010" : "#180c3e"
             horizontalAlignment: Text.AlignHCenter
@@ -167,7 +167,7 @@ GridLayout{
             text: "3"
             font.family: localFont.name
             style: Text.Outline
-            font.pixelSize: 32
+            font.pixelSize: 40
             //font: fig3.font
             color: fig3.down ? "#000010" : "#180c3e"
             horizontalAlignment: Text.AlignHCenter
@@ -205,7 +205,7 @@ GridLayout{
             id: text4
             text: "4"
             font.family: localFont.name
-            font.pixelSize: 32
+            font.pixelSize: 40
             //font: fig4.font
             color: fig4.down ? "#000010" : "#180c3e"
             horizontalAlignment: Text.AlignHCenter
@@ -243,7 +243,7 @@ GridLayout{
             id: text5;
             text: "5"
             font.family: localFont.name
-            font.pixelSize: 32
+            font.pixelSize: 40
             //font: fig5.font
             color: fig5.down ? "#000010" : "#180c3e"
             horizontalAlignment: Text.AlignHCenter
@@ -281,7 +281,7 @@ GridLayout{
             id: text6
             text: "6"
             font.family: localFont.name
-            font.pixelSize: 32
+            font.pixelSize: 40
             //font: fig6.font
             color: fig6.down ? "#000010" : "#180c3e"
             horizontalAlignment: Text.AlignHCenter
@@ -319,7 +319,7 @@ GridLayout{
             id: text7
             text: "7"
             font.family: localFont.name
-            font.pixelSize: 32
+            font.pixelSize: 40
             //font: fig7.font
             color: fig7.down ? "#000010" : "#180c3e"
             horizontalAlignment: Text.AlignHCenter
@@ -357,7 +357,7 @@ GridLayout{
             id: text8
             text: "8"
             font.family: localFont.name
-            font.pixelSize: 32
+            font.pixelSize: 40
             //font: fig8.font
             color: fig8.down ? "#000010" : "#180c3e"
             horizontalAlignment: Text.AlignHCenter
@@ -395,7 +395,7 @@ GridLayout{
             id: text9
             text: "9"
             font.family: localFont.name
-            font.pixelSize: 32
+            font.pixelSize: 40
             //font: fig9.font
             color: fig9.down ? "#000010" : "#180c3e"
             horizontalAlignment: Text.AlignHCenter
@@ -432,7 +432,7 @@ GridLayout{
         contentItem: Text {
             text: "."
             font.family: localFont.name
-            font.pixelSize: 32
+            font.pixelSize: 40
             //font: figPoint.font
             color: figPoint.down ? "#000010" : "#180c3e"
             horizontalAlignment: Text.AlignHCenter
@@ -469,7 +469,7 @@ GridLayout{
         contentItem: Text {
             text: "<"
             font.family: localFont.name
-            font.pixelSize: 32
+            font.pixelSize: 40
             //font: figReverse.font
             color: figReverse.down ? "#000010" : "#180c3e"
             horizontalAlignment: Text.AlignHCenter
@@ -506,7 +506,7 @@ GridLayout{
         contentItem: Text {
             text: "0"
             font.family: localFont.name
-            font.pixelSize: 32
+            font.pixelSize: 40
             //font: fig0.font
             color: fig0.down ? "#000010" : "#180c3e"
             horizontalAlignment: Text.AlignHCenter

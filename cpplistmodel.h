@@ -22,12 +22,12 @@ public:
     virtual QHash<int, QByteArray> roleNames() const;
     virtual bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
     Q_INVOKABLE void calc1ButClicked(QVariant x);
-    __forceinline Q_INVOKABLE void zeroes() {
+    inline Q_INVOKABLE void zeroes() {
         setZeroes();
     }
 private:
     void init();
-    __forceinline void printData(const QString &receive, const QString &threat);
+    inline void printData(const QString &receive, const QString &threat);
     QHash<QModelIndex, QVariant> text_data;
     QString* receivedStr{nullptr};
     QString* threatData{nullptr};
@@ -44,7 +44,7 @@ private:
     CountingState countState = CountingState::FIRST;
     bool startCountFlag = false;
     bool startOperatorFlag = false;
-    __forceinline void setZeroes() {
+    inline void setZeroes() {
         first = 0; second = 0;
         *receivedStr = "";
         *threatData = "";
