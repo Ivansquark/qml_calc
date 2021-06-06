@@ -82,7 +82,7 @@ void CppListModel::calc1ButClicked(QVariant x)
                 first = receivedStr->toDouble();
                 *firstOperator = "sqrt";
                 qDebug() << "firstOperator";
-                countState = CountingState::START_COUNT;
+                countState = CountingState::OPERATOR2;
             } else {
                 zeroes();
             }
@@ -117,18 +117,18 @@ void CppListModel::calc1ButClicked(QVariant x)
                 second = temp.toDouble();
                 printData(*threatData,tempStr);
                 *secondOperator = "=";
-                countState = CountingState::START_COUNT;
+                countState = CountingState::OPERATOR2;
             } else {
                 second = receivedStr->toDouble();
                 *secondOperator = tempStr;
                 *threatData += "=";
                 //*secondOperator = "=";
-                countState = CountingState::START_COUNT;
+                countState = CountingState::OPERATOR2;
             }
         } else if(tempStr == "sqrt") {
             second = receivedStr->toDouble();
             *secondOperator = tempStr;
-            countState = CountingState::START_COUNT;
+            countState = CountingState::OPERATOR2;
         } else if (tempStr == "<") { // deleting one symbol or skipping
             if(*receivedStr != "") {
                 threatData->chop(1);
@@ -139,11 +139,11 @@ void CppListModel::calc1ButClicked(QVariant x)
             if(*receivedStr != "") {
                 second = receivedStr->toDouble();
                 *secondOperator = tempStr; *threatData += "=";
-                countState = CountingState::START_COUNT; // received operator
+                countState = CountingState::OPERATOR2; // received operator
             }
         }
     }
-    if (countState == CountingState::START_COUNT) {
+    if (countState == CountingState::OPERATOR2) {
         double res = 0;
         qDebug() << "res";
         if(*firstOperator == "sqrt") {
@@ -206,6 +206,9 @@ void CppListModel::calc1ButClicked(QVariant x)
 }
 
 void CppListModel::init() {
+    firstStr = new QString;
+    secondStr = new QString;
+    resStr = new QString;
     receivedStr = new QString;
     threatData = new QString;
     firstOperator = new QString;

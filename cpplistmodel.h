@@ -31,6 +31,9 @@ private:
     QHash<QModelIndex, QVariant> text_data;
     QString* receivedStr{nullptr};
     QString* threatData{nullptr};
+    QString* firstStr{nullptr};
+    QString* secondStr{nullptr};
+    QString* resStr{nullptr};
     QString* firstOperator{nullptr};
     QString* secondOperator{nullptr};
     double first = 0;
@@ -39,7 +42,7 @@ private:
         FIRST = 0,
         OPERATOR = 1,
         SECOND = 2,
-        START_COUNT = 3
+        OPERATOR2 = 3
     };
     CountingState countState = CountingState::FIRST;
     bool startCountFlag = false;

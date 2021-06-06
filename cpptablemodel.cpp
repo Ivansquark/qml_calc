@@ -110,7 +110,7 @@ void CppTableModel::calcButClicked(QVariant x) {
         }else if(dec_hex_bin_state == 1) {
             if(receivedStr->size()>7) return;
         } else {
-            if(receivedStr->size()>9) return;
+            if(receivedStr->size()>8) return;
         }
         *receivedStr += tempStr;
     }

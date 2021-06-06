@@ -122,7 +122,7 @@ Page {
                         Text {
                             id: textHex
                             font.family: localFont.name
-                            font.pixelSize: 25
+                            font.pixelSize: 20
                             //height: parent.height
                             //width: parent.width
                             anchors.centerIn: parent
