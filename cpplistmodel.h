@@ -49,10 +49,17 @@ private:
     bool startOperatorFlag = false;
     inline void setZeroes() {
         first = 0; second = 0;
-        *receivedStr = "";
+        *receivedStr = ""; *firstStr = ""; *secondStr="";
+        *firstOperator = ""; *secondOperator="";
         *threatData = "";
         setData(index(0),"0",TextRole);
         setData(index(1),"0",TextRole);
+    }
+    inline void setZeroesValues() {
+        first = 0; second = 0;
+        *receivedStr = ""; *firstStr = ""; *secondStr="";
+        *firstOperator = ""; *secondOperator="";
+        *threatData = "";
     }
 
 };

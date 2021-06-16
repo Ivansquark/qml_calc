@@ -57,7 +57,7 @@ void CppListModel::calc1ButClicked(QVariant x)
     QString tempStr = x.toString();
     //qDebug() << tempStr;
     if(tempStr == "C") {
-        zeroes();
+        zeroes();countState = CountingState::FIRST;
         return;
     }
 
@@ -79,7 +79,7 @@ void CppListModel::calc1ButClicked(QVariant x)
             }
         } else if (tempStr == "sqrt") { // binary operator
             if(*receivedStr != "") {
-                first = receivedStr->toDouble();
+                *firstStr = *receivedStr;
                 *firstOperator = "sqrt";
                 qDebug() << "firstOperator";
                 countState = CountingState::OPERATOR2;
@@ -101,32 +101,31 @@ void CppListModel::calc1ButClicked(QVariant x)
         }
     }
     if (countState == CountingState::OPERATOR) { //! operator parsing
-        first = receivedStr->toDouble();
+        *firstStr = *receivedStr;
         *receivedStr = "";
         printData(*firstOperator,*threatData);
+        *threatData = "";
         countState = CountingState::SECOND;
     }
     if (countState == CountingState::SECOND) {
         if((tempStr != "=") and (tempStr != "-") and (tempStr != "+") and (tempStr != "*") and
                 (tempStr != "/") and (tempStr != "sqrt") and (tempStr != "<")) {
             *receivedStr += tempStr; *threatData += tempStr;
-            printData(*receivedStr,*threatData);
+            *secondStr+=tempStr;
+            printData(*receivedStr, *firstStr+*firstOperator+*threatData);
+            qDebug()<<*firstStr+*firstOperator+*threatData;
         } else if (tempStr == "="){
             if(*receivedStr == "") {
                 QString temp = *threatData; temp.chop(1);
-                second = temp.toDouble();
                 printData(*threatData,tempStr);
                 *secondOperator = "=";
                 countState = CountingState::OPERATOR2;
             } else {
-                second = receivedStr->toDouble();
                 *secondOperator = tempStr;
                 *threatData += "=";
-                //*secondOperator = "=";
                 countState = CountingState::OPERATOR2;
             }
         } else if(tempStr == "sqrt") {
-            second = receivedStr->toDouble();
             *secondOperator = tempStr;
             countState = CountingState::OPERATOR2;
         } else if (tempStr == "<") { // deleting one symbol or skipping
@@ -137,8 +136,7 @@ void CppListModel::calc1ButClicked(QVariant x)
             }
         } else {
             if(*receivedStr != "") {
-                second = receivedStr->toDouble();
-                *secondOperator = tempStr; *threatData += "=";
+                *secondOperator = tempStr;
                 countState = CountingState::OPERATOR2; // received operator
             }
         }
@@ -146,48 +144,36 @@ void CppListModel::calc1ButClicked(QVariant x)
     if (countState == CountingState::OPERATOR2) {
         double res = 0;
         qDebug() << "res";
+        first = firstStr->toDouble();
+        second = secondStr->toDouble();
+        *threatData = *firstStr + *firstOperator + *secondStr + *secondOperator;
+        qDebug()<<"first second"<<first<<second;
         if(*firstOperator == "sqrt") {
             //qDebug() << "res";
             res = sqrt(first);
             second=0;
-            tempStr = QString::number(res,'g',12);
+            *firstStr = QString::number(res,'g',12);
             *threatData = "\u221A" + QString::number(first);
-            printData(tempStr, *threatData);
-            *receivedStr = ""; *threatData = tempStr;
-            countState = CountingState::FIRST;
+            printData(*firstStr, *threatData);
+            *receivedStr = "";
+            countState = CountingState::FIRST; return;
         } else if(*firstOperator == "*") {
             res = first * second;
-            tempStr = QString::number(res,'g',12);
-            printData(tempStr,*threatData);
-            *receivedStr = ""; *threatData = tempStr;
-            countState = CountingState::FIRST;
         } else if(*firstOperator == "/") {
             res = first / second;
-            tempStr = QString::number(res,'g',12);
-            printData(tempStr,*threatData);
-            *receivedStr = ""; *threatData = tempStr;
-            countState = CountingState::FIRST;
         } else if(*firstOperator == "+") {
             res = first + second;
-            qDebug() << "first" << first <<"second"<<second<< "res"<<res;
-            qDebug() << "firstOP" << *firstOperator <<"secondOP"<<*secondOperator;
-            tempStr = QString::number(res,'g',12);
-            printData(tempStr,*threatData);
-            *receivedStr = ""; *threatData = "";
-            countState = CountingState::FIRST;
         } else if(*firstOperator == "-") {
             res = first - second;
-            tempStr = QString::number(res,'g',12);
-            printData(tempStr,*threatData);
-            *receivedStr = ""; *threatData = "";;
-            countState = CountingState::FIRST;
         } else {
             *receivedStr = "";
-            countState = CountingState::FIRST; // received operator
         }
         if(*secondOperator == "=") {
-            *receivedStr = ""; *threatData = "";
+            printData(QString::number(res), *threatData);
+            setZeroesValues();
+            countState = CountingState::FIRST;
         } else if(*secondOperator == "sqrt") {
+
             res = sqrt(res);
             tempStr = QString::number(res,'g',12);
             *threatData = "\u221A" + *threatData;
@@ -195,12 +181,14 @@ void CppListModel::calc1ButClicked(QVariant x)
             *receivedStr = ""; *threatData = tempStr;
             countState = CountingState::FIRST;
         } else if(*secondOperator != ""){
-            //qDebug()<<"secondOperator";
-            //*receivedStr = "";
-            //*threatData=QString::number(res);
-            //tempStr=*secondOperator;
-            //printData(*threatData, tempStr);
-            //countState = CountingState::FIRST;
+            *firstStr = QString::number(res);
+            *threatData=*firstStr+*secondOperator;
+            tempStr = *secondOperator;
+            printData(tempStr, *threatData);
+            *threatData = ""; *receivedStr = ""; *secondStr = "";
+            *firstOperator = *secondOperator; *secondOperator = "";
+            //*receivedStr = *firstStr+*secondOperator;
+            countState = CountingState::SECOND;
         }
     }
 }
