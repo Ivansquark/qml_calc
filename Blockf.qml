@@ -92,11 +92,11 @@ GridLayout{
             verticalAlignment: Text.AlignVCenter
         }
         background: Rectangle {
-                border.color: fig1.pressed ? "#999999" : "#898999"
-                border.width: fig1.pressed ? 1 : 2
-                radius: 15
-                gradient: Gradient {
-                    GradientStop {
+            border.color: fig1.pressed ? "#999999" : "#898999"
+            border.width: fig1.pressed ? 1 : 2
+            radius: 15
+            gradient: Gradient {
+                GradientStop {
                     position: 0.1;
                     color: "#95dbd7";
                 }
@@ -107,8 +107,9 @@ GridLayout{
             }
         }
         onClicked: {
-           dataModel.calcButClicked("1");
-           cppListModel.calc1ButClicked("1");
+            dataModel.calcButClicked("1");
+            cppListModel.calc1ButClicked("1");
+            dotNowPressed = false;
         }
     }
 
@@ -133,11 +134,11 @@ GridLayout{
             verticalAlignment: Text.AlignVCenter
         }
         background: Rectangle {
-                border.color: fig2.pressed ? "#999999" : "#898999"
-                border.width: fig2.pressed ? 1 : 2
-                radius: 15
-                gradient: Gradient {
-                    GradientStop {
+            border.color: fig2.pressed ? "#999999" : "#898999"
+            border.width: fig2.pressed ? 1 : 2
+            radius: 15
+            gradient: Gradient {
+                GradientStop {
                     position: 0.1;
                     color: "#95dbd7";
                 }
@@ -150,6 +151,7 @@ GridLayout{
         onClicked: {
             dataModel.calcButClicked("2");
             cppListModel.calc1ButClicked("2");
+            dotNowPressed = false;
         }
     }
 
@@ -174,11 +176,11 @@ GridLayout{
             verticalAlignment: Text.AlignVCenter
         }
         background: Rectangle {
-                border.color: fig3.pressed ? "#999999" : "#898999"
-                border.width: fig3.pressed ? 1 : 2
-                radius: 15
-                gradient: Gradient {
-                    GradientStop {
+            border.color: fig3.pressed ? "#999999" : "#898999"
+            border.width: fig3.pressed ? 1 : 2
+            radius: 15
+            gradient: Gradient {
+                GradientStop {
                     position: 0.1;
                     color: "#95dbd7";
                 }
@@ -191,6 +193,7 @@ GridLayout{
         onClicked: {
             dataModel.calcButClicked("3");
             cppListModel.calc1ButClicked("3");
+            dotNowPressed = false;
         }
     }
     Button {
@@ -212,11 +215,11 @@ GridLayout{
             verticalAlignment: Text.AlignVCenter
         }
         background: Rectangle {
-                border.color: fig4.pressed ? "#999999" : "#898999"
-                border.width: fig4.pressed ? 1 : 2
-                radius: 15
-                gradient: Gradient {
-                    GradientStop {
+            border.color: fig4.pressed ? "#999999" : "#898999"
+            border.width: fig4.pressed ? 1 : 2
+            radius: 15
+            gradient: Gradient {
+                GradientStop {
                     position: 0.1;
                     color: "#95dbd7";
                 }
@@ -227,8 +230,9 @@ GridLayout{
             }
         }
         onClicked: {
-           dataModel.calcButClicked("4");
-           cppListModel.calc1ButClicked("4");
+            dataModel.calcButClicked("4");
+            cppListModel.calc1ButClicked("4");
+            dotNowPressed = false;
         }
     }
     Button {
@@ -250,11 +254,11 @@ GridLayout{
             verticalAlignment: Text.AlignVCenter
         }
         background: Rectangle {
-                border.color: fig5.pressed ? "#999999" : "#898999"
-                border.width: fig5.pressed ? 1 : 2
-                radius: 15
-                gradient: Gradient {
-                    GradientStop {
+            border.color: fig5.pressed ? "#999999" : "#898999"
+            border.width: fig5.pressed ? 1 : 2
+            radius: 15
+            gradient: Gradient {
+                GradientStop {
                     position: 0.1;
                     color: "#95dbd7";
                 }
@@ -267,6 +271,7 @@ GridLayout{
         onClicked: {
             dataModel.calcButClicked("5");
             cppListModel.calc1ButClicked("5");
+            dotNowPressed = false;
         }
     }
     Button {
@@ -288,11 +293,11 @@ GridLayout{
             verticalAlignment: Text.AlignVCenter
         }
         background: Rectangle {
-                border.color: fig6.pressed ? "#999999" : "#898999"
-                border.width: fig6.pressed ? 1 : 2
-                radius: 15
-                gradient: Gradient {
-                    GradientStop {
+            border.color: fig6.pressed ? "#999999" : "#898999"
+            border.width: fig6.pressed ? 1 : 2
+            radius: 15
+            gradient: Gradient {
+                GradientStop {
                     position: 0.1;
                     color: "#95dbd7";
                 }
@@ -305,6 +310,7 @@ GridLayout{
         onClicked: {
             dataModel.calcButClicked("6");
             cppListModel.calc1ButClicked("6");
+            dotNowPressed = false;
         }
     }
     Button {
@@ -326,11 +332,11 @@ GridLayout{
             verticalAlignment: Text.AlignVCenter
         }
         background: Rectangle {
-                border.color: fig7.pressed ? "#999999" : "#898999"
-                border.width: fig7.pressed ? 1 : 2
-                radius: 15
-                gradient: Gradient {
-                    GradientStop {
+            border.color: fig7.pressed ? "#999999" : "#898999"
+            border.width: fig7.pressed ? 1 : 2
+            radius: 15
+            gradient: Gradient {
+                GradientStop {
                     position: 0.1;
                     color: "#95dbd7";
                 }
@@ -343,6 +349,7 @@ GridLayout{
         onClicked: {
             dataModel.calcButClicked("7");
             cppListModel.calc1ButClicked("7");
+            dotNowPressed = false;
         }
     }
     Button {
@@ -381,6 +388,7 @@ GridLayout{
         onClicked: {
             dataModel.calcButClicked("8");
             cppListModel.calc1ButClicked("8");
+            dotNowPressed = false;
         }
     }
     Button {
@@ -402,11 +410,11 @@ GridLayout{
             verticalAlignment: Text.AlignVCenter
         }
         background: Rectangle {
-                border.color: fig9.pressed ? "#999999" : "#898999"
-                border.width: fig9.pressed ? 1 : 2
-                radius: 15
-                gradient: Gradient {
-                    GradientStop {
+            border.color: fig9.pressed ? "#999999" : "#898999"
+            border.width: fig9.pressed ? 1 : 2
+            radius: 15
+            gradient: Gradient {
+                GradientStop {
                     position: 0.1;
                     color: "#95dbd7";
                 }
@@ -419,6 +427,7 @@ GridLayout{
         onClicked: {
             dataModel.calcButClicked("9");
             cppListModel.calc1ButClicked("9");
+            dotNowPressed = false;
         }
     }
     Button {
@@ -439,11 +448,11 @@ GridLayout{
             verticalAlignment: Text.AlignVCenter
         }
         background: Rectangle {
-                border.color: figPoint.pressed ? "#999999" : "#898999"
-                border.width: figPoint.pressed ? 1 : 2
-                radius: 15
-                gradient: Gradient {
-                    GradientStop {
+            border.color: figPoint.pressed ? "#999999" : "#898999"
+            border.width: figPoint.pressed ? 1 : 2
+            radius: 15
+            gradient: Gradient {
+                GradientStop {
                     position: 0.1;
                     color: "#95dbd7";
                 }
@@ -455,7 +464,11 @@ GridLayout{
         }
         visible: false
         onClicked: {
-            cppListModel.calc1ButClicked(".");
+            if(dotPressed === false) {
+                dotNowPressed = true;
+                dotPressed = true;
+                cppListModel.calc1ButClicked(".");
+            }
         }
     }
     Button {
@@ -476,11 +489,11 @@ GridLayout{
             verticalAlignment: Text.AlignVCenter
         }
         background: Rectangle {
-                border.color: figReverse.pressed ? "#999999" : "#898999"
-                border.width: figReverse.pressed ? 1 : 2
-                radius: 15
-                gradient: Gradient {
-                    GradientStop {
+            border.color: figReverse.pressed ? "#999999" : "#898999"
+            border.width: figReverse.pressed ? 1 : 2
+            radius: 15
+            gradient: Gradient {
+                GradientStop {
                     position: 0.1;
                     color: "#95dbd7";
                 }
@@ -493,6 +506,10 @@ GridLayout{
         onClicked: {
             dataModel.calcButClicked("<");
             cppListModel.calc1ButClicked("<")
+            if(dotNowPressed) {
+                dotPressed = false;
+            }
+            dotNowPressed = false;
         }
     }
     Button {
@@ -513,11 +530,11 @@ GridLayout{
             verticalAlignment: Text.AlignVCenter
         }
         background: Rectangle {
-                border.color: fig0.pressed ? "#999999" : "#898999"
-                border.width: fig0.pressed ? 1 : 2
-                radius: 15
-                gradient: Gradient {
-                    GradientStop {
+            border.color: fig0.pressed ? "#999999" : "#898999"
+            border.width: fig0.pressed ? 1 : 2
+            radius: 15
+            gradient: Gradient {
+                GradientStop {
                     position: 0.1;
                     color: "#95dbd7";
                 }
@@ -530,6 +547,7 @@ GridLayout{
         onClicked: {
             dataModel.calcButClicked("0");
             cppListModel.calc1ButClicked("0");
+            dotNowPressed = false;
         }
     }
 }

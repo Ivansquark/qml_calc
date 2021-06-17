@@ -7,6 +7,16 @@ CppListModel::~CppListModel() {
 
 }
 
+bool CppListModel::isEnabled()
+{
+    return dotPressedFlag;
+}
+
+void CppListModel::setEnabled(bool value)
+{
+    dotPressedFlag = value;
+}
+
 int CppListModel::rowCount(const QModelIndex &parent) const
 {
     return 2;
@@ -74,6 +84,10 @@ void CppListModel::calc1ButClicked(QVariant x)
         } else if (tempStr == "<") { // deleting one symbol or skipping
             if(*receivedStr != "") {
                 //threatData->chop(1);
+                qDebug()<<"receivedStr->data()[receivedStr->size()-1]"<< receivedStr->data()[receivedStr->size()-1];
+                if(receivedStr->data()[receivedStr->size()-1] == "."){
+                    emit sendDotDisable();
+                }
                 receivedStr->chop(1);
                 printData(*threatData,*receivedStr);
             }

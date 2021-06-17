@@ -7,11 +7,20 @@ import cppListModel 1.0
 
 Window {
     id: window1
+    objectName: "window1"
     visible: true
     width: 500
     height: 500
     property int caseIndex: 0
     property int defMargine: 10
+    property bool dotPressed: false
+    property bool dotNowPressed: false
+    Connections {
+        target: win
+        sendDotDisable: {
+            dotPressed = false;
+        }
+    }
     signal fig1Click();
     CppModel {
         id: dataModel

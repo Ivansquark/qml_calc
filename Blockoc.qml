@@ -22,11 +22,11 @@ ColumnLayout{
             horizontalAlignment: Text.AlignHCenter
         }
         background: Rectangle {
-                border.color: figMinus.pressed ? "#999999" : "#898999"
-                border.width: figMinus.pressed ? 1 : 2
-                radius: 15
-                gradient: Gradient {
-                    GradientStop {
+            border.color: figMinus.pressed ? "#999999" : "#898999"
+            border.width: figMinus.pressed ? 1 : 2
+            radius: 15
+            gradient: Gradient {
+                GradientStop {
                     position: 0.1;
                     color: "#95dbd7";
                 }
@@ -37,7 +37,9 @@ ColumnLayout{
             }
         }
         onClicked: {
-           cppListModel.calc1ButClicked("-");
+            cppListModel.calc1ButClicked("-");
+            dotPressed = false;
+            dotNowPressed = false;
         }
     }
     Button {
@@ -56,11 +58,11 @@ ColumnLayout{
             horizontalAlignment: Text.AlignHCenter
         }
         background: Rectangle {
-                border.color: figPlus.pressed ? "#999999" : "#898999"
-                border.width: figPlus.pressed ? 1 : 2
-                radius: 15
-                gradient: Gradient {
-                    GradientStop {
+            border.color: figPlus.pressed ? "#999999" : "#898999"
+            border.width: figPlus.pressed ? 1 : 2
+            radius: 15
+            gradient: Gradient {
+                GradientStop {
                     position: 0.1;
                     color: "#95dbd7";
                 }
@@ -71,9 +73,11 @@ ColumnLayout{
             }
         }
         onClicked: {
-           cppListModel.calc1ButClicked("+");
+            cppListModel.calc1ButClicked("+");
+            dotPressed = false;
+            dotNowPressed = false;
         }
-    }    
+    }
     Button {
         id: figEq
         Layout.row: 3
@@ -91,11 +95,11 @@ ColumnLayout{
             horizontalAlignment: Text.AlignHCenter
         }
         background: Rectangle {
-                border.color: figEq.pressed ? "#999999" : "#898999"
-                border.width: figEq.pressed ? 1 : 2
-                radius: 15
-                gradient: Gradient {
-                    GradientStop {
+            border.color: figEq.pressed ? "#999999" : "#898999"
+            border.width: figEq.pressed ? 1 : 2
+            radius: 15
+            gradient: Gradient {
+                GradientStop {
                     position: 0.1;
                     color: "#95dbd7";
                 }
@@ -106,7 +110,9 @@ ColumnLayout{
             }
         }
         onClicked: {
-           cppListModel.calc1ButClicked("=");
+            cppListModel.calc1ButClicked("=");
+            dotPressed = false;
+            dotNowPressed = false;
         }
     }
 }

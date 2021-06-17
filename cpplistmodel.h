@@ -16,6 +16,14 @@ public:
     };
     CppListModel(QObject* parent = nullptr);
     ~CppListModel();
+    Q_PROPERTY(bool enabled READ isEnabled WRITE setEnabled)
+
+signals:
+    void sendDotDisable();
+
+public:
+    bool isEnabled();
+    void setEnabled(bool value);
 
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
     virtual QVariant data(const QModelIndex &index, int role=Qt::DisplayRole) const;
@@ -47,6 +55,7 @@ private:
     CountingState countState = CountingState::FIRST;
     bool startCountFlag = false;
     bool startOperatorFlag = false;
+    bool dotPressedFlag=false;
     inline void setZeroes() {
         first = 0; second = 0;
         *receivedStr = ""; *firstStr = ""; *secondStr="";
