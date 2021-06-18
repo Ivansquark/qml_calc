@@ -16,11 +16,13 @@ Window {
     property bool dotPressed: false
     property bool dotNowPressed: false
     Connections {
-        target: win
-        sendDotDisable: {
-            dotPressed = false;
+            target: cppListModel
+            //! get signal from c++
+            onSendDotDisable: {
+                window1.dotPressed = false;
+                //console.log("dotPressed = false;");
+            }
         }
-    }
     signal fig1Click();
     CppModel {
         id: dataModel

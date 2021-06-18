@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.11.1, 2021-06-17T22:22:45. -->
+<!-- Written by QtCreator 4.11.1, 2021-06-18T22:19:13. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -575,6 +575,7 @@
     <valuelist type="QVariantList" key="Android.PreStartShellCmdListKey"/>
     <value type="int" key="PE.EnvironmentAspect.Base">0</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">qml2</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.AndroidRunConfiguration:D:/Qt/proj/qml_calc/qml_calc/qml2.pro</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">D:/Qt/proj/qml_calc/qml_calc/qml2.pro</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>

@@ -106,11 +106,11 @@ void CppTableModel::calcButClicked(QVariant x) {
         return;
     } else {
         if(dec_hex_bin_state == 2){
-            if(receivedStr->size()>15) return;
+            if(receivedStr->size()>31) return;
         }else if(dec_hex_bin_state == 1) {
             if(receivedStr->size()>7) return;
         } else {
-            if(receivedStr->size()>8) return;
+            if(receivedStr->size()>9 || receivedStr->toUInt() >0xFFFFFFFF) return;
         }
         *receivedStr += tempStr;
     }

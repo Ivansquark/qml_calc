@@ -465,7 +465,6 @@ GridLayout{
         visible: false
         onClicked: {
             if(dotPressed === false) {
-                dotNowPressed = true;
                 dotPressed = true;
                 cppListModel.calc1ButClicked(".");
             }
@@ -506,10 +505,8 @@ GridLayout{
         onClicked: {
             dataModel.calcButClicked("<");
             cppListModel.calc1ButClicked("<")
-            if(dotNowPressed) {
-                dotPressed = false;
-            }
-            dotNowPressed = false;
+            //dotPressed = false;
+
         }
     }
     Button {
@@ -546,8 +543,7 @@ GridLayout{
         }
         onClicked: {
             dataModel.calcButClicked("0");
-            cppListModel.calc1ButClicked("0");
-            dotNowPressed = false;
+            cppListModel.calc1ButClicked("0");            
         }
     }
 }

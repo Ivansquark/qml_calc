@@ -17,14 +17,17 @@ int main(int argc, char *argv[])
     qmlRegisterType<CppListModel>("cppListModel",1,0,"CppListModel");
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
-    engine.rootContext()->setContextProperty("win", &cppListModel);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl)
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
 
-
+    QQmlContext *context = engine.rootContext();    // Создаём корневой контекст
+        /* Загружаем объект в контекст для установки соединения,
+         * а также определяем имя, по которому будет происходить соединение
+         * */
+        context->setContextProperty("cppWin", &cppListModel);
     //QObject::connect();
     //engine.rootContext()->setContextProperty("interface",&interface);
     engine.load(url);

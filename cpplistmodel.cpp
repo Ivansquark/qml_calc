@@ -84,12 +84,13 @@ void CppListModel::calc1ButClicked(QVariant x)
         } else if (tempStr == "<") { // deleting one symbol or skipping
             if(*receivedStr != "") {
                 //threatData->chop(1);
-                qDebug()<<"receivedStr->data()[receivedStr->size()-1]"<< receivedStr->data()[receivedStr->size()-1];
                 if(receivedStr->data()[receivedStr->size()-1] == "."){
                     emit sendDotDisable();
+                    qDebug()<<"receivedStr->data()[receivedStr->size()-1]"<< receivedStr->data()[receivedStr->size()-1];
                 }
                 receivedStr->chop(1);
-                printData(*threatData,*receivedStr);
+                threatData->chop(1);
+                printData(*receivedStr, *threatData);
             }
         } else if (tempStr == "sqrt") { // binary operator
             if(*receivedStr != "") {
@@ -125,8 +126,8 @@ void CppListModel::calc1ButClicked(QVariant x)
         if((tempStr != "=") and (tempStr != "-") and (tempStr != "+") and (tempStr != "*") and
                 (tempStr != "/") and (tempStr != "sqrt") and (tempStr != "<")) {
             *receivedStr += tempStr; *threatData += tempStr;
-            *secondStr+=tempStr;
-            printData(*receivedStr, *firstStr+*firstOperator+*threatData);
+            *secondStr=*receivedStr;
+            printData(*receivedStr, *firstStr+*firstOperator+*secondStr);
             qDebug()<<*firstStr+*firstOperator+*threatData;
         } else if (tempStr == "="){
             if(*receivedStr == "") {
@@ -140,13 +141,27 @@ void CppListModel::calc1ButClicked(QVariant x)
                 countState = CountingState::OPERATOR2;
             }
         } else if(tempStr == "sqrt") {
-            *secondOperator = tempStr;
+            if(*receivedStr != "") {
+                *secondStr = *receivedStr;
+                *secondOperator = "sqrt";
+                qDebug() << "secondOperator";
+                countState = CountingState::OPERATOR2;
+            } else {
+                zeroes();
+            }
+            //*secondOperator = tempStr;
             countState = CountingState::OPERATOR2;
         } else if (tempStr == "<") { // deleting one symbol or skipping
             if(*receivedStr != "") {
-                threatData->chop(1);
+                if(receivedStr->data()[receivedStr->size()-1] == "."){
+                    emit sendDotDisable();
+                }
+                *threatData = *firstStr + *firstOperator + *receivedStr;
                 receivedStr->chop(1);
-                printData(*threatData,*receivedStr);
+                threatData->chop(1);
+                *secondStr = *receivedStr;
+                printData(*receivedStr, *threatData);
+                *threatData = "";
             }
         } else {
             if(*receivedStr != "") {
@@ -167,10 +182,11 @@ void CppListModel::calc1ButClicked(QVariant x)
             res = sqrt(first);
             second=0;
             *firstStr = QString::number(res,'g',12);
-            *threatData = "\u221A" + QString::number(first);
+            *threatData = "\u221A" + QString::number(first);            
             printData(*firstStr, *threatData);
             *receivedStr = "";
-            countState = CountingState::FIRST; return;
+            setZeroesValues();
+            countState = CountingState::FIRST;
         } else if(*firstOperator == "*") {
             res = first * second;
         } else if(*firstOperator == "/") {
@@ -187,12 +203,13 @@ void CppListModel::calc1ButClicked(QVariant x)
             setZeroesValues();
             countState = CountingState::FIRST;
         } else if(*secondOperator == "sqrt") {
-
+            *threatData = QString::number(res,'g',12);
             res = sqrt(res);
             tempStr = QString::number(res,'g',12);
             *threatData = "\u221A" + *threatData;
             printData(tempStr,*threatData);
             *receivedStr = ""; *threatData = tempStr;
+            setZeroesValues();
             countState = CountingState::FIRST;
         } else if(*secondOperator != ""){
             *firstStr = QString::number(res);
